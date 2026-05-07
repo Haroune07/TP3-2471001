@@ -171,6 +171,12 @@ resource "aws_instance" "tp3_server" {
   subnet_id              = aws_subnet.tp3_public.id
   vpc_security_group_ids = [aws_security_group.tp3_sg.id]
 
+  # Augmentation de la taille du disque à 30 Go (inclus dans l'offre gratuite AWS)
+  root_block_device {
+    volume_size = 30
+    volume_type = "gp3"
+  }
+
   # 7. Déploiement automatisé (Bonus: Script user-data automatisé)
   user_data = <<-EOF
               #!/bin/bash
